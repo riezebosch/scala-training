@@ -27,7 +27,7 @@ class ConsTest extends FlatSpec with GivenWhenThen with Matchers {
     assert(!(result contains 3))
   }
 
-  it should "contain unique values after union" in {
+  it should "contain values after union" in {
     val list = Cons(5, Cons(3, Nil))
     val result = list union Cons(9, Cons(7, Nil))
 
@@ -35,6 +35,22 @@ class ConsTest extends FlatSpec with GivenWhenThen with Matchers {
     assert(result contains 7)
     assert(result contains 5)
     assert(result contains 3)
+  }
+
+  it should "contain unique values after union" in {
+    val list1 = Cons(5, Nil)
+    val list2 = Cons(5, Nil)
+    val result = list1 union list2
+
+    assert(result.toString == "5")
+  }
+
+  it should "contain original values after union" in {
+    val list1 = Cons(3, Cons(3, Nil))
+    val list2 = Cons(5, Nil)
+    val result = list1 union list2
+
+    assert(result.toString == "3 - 3 - 5")
   }
 
   it should "write empty for an empty list" in {

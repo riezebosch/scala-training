@@ -8,7 +8,7 @@ abstract class List[+T] {
 
   def union[SuperT >: T](list: List[SuperT]): List[SuperT] = this match {
     case Nil => list
-    case Cons(n, xs) =>  xs union (list add n)
+    case Cons(n, xs) =>  if (list contains n) list union xs else Cons(n, xs union list)
   }
 
   def map[U](f: T => U): List[U] = this match {
