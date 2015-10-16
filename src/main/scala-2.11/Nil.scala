@@ -1,1 +1,0 @@
-case object Nil extends List[Nothing]

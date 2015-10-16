@@ -1,1 +1,0 @@
-case class Cons[T](x: T, xs: List[T]) extends List[T]
