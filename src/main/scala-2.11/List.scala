@@ -1,23 +1,23 @@
 import scala.annotation.tailrec
 
-abstract class IntList {
-  def add(n: Int): IntList = {
-    if (!contains(n)) new Cons(n, this)
+abstract class List[+T] {
+  def add[SuperT >: T](n: SuperT): List[SuperT] = {
+    if (!contains(n)) Cons(n, this)
     else this
   }
 
-  def union(list: IntList): IntList = this match {
+  def union[SuperT >: T](list: List[SuperT]): List[SuperT] = this match {
     case Nil => list
     case Cons(n, xs) =>  xs union (list add n)
   }
 
-  def map(function: (Int) => Int): IntList = this match {
+  def map[U](f: T => U): List[U] = this match {
     case Nil => Nil
-    case Cons(n, xs) => new Cons(function(n), xs map function)
+    case Cons(n, xs) => new Cons(f(n), xs map f)
   }
 
   @tailrec
-  final def contains(n: Int): Boolean = this match {
+  final def contains[SuperT >: T](n: SuperT): Boolean = this match {
     case Nil => false
     case Cons(x, xs) => x == n || (xs contains n)
   }

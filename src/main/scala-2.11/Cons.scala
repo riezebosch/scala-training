@@ -1,2 +1,1 @@
-case class Cons(x: Int, xs: IntList) extends IntList{
-}
+case class Cons[T](x: T, xs: List[T]) extends List[T]

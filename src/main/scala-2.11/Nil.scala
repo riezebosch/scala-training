@@ -1,2 +1,1 @@
-case object Nil extends IntList {
-}
+case object Nil extends List[Nothing]
