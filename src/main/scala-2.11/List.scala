@@ -27,4 +27,10 @@ abstract class List[+T] {
     case Cons(x, Nil) => x.toString
     case Cons(x, xs) => s"${x.toString} - ${xs.toString}"
   }
+
+  def reverse : List[T] = this match {
+    case Nil => Nil
+    case Cons(x, Nil) => this
+    case Cons(x, xs) => xs reverse 
+  }
 }

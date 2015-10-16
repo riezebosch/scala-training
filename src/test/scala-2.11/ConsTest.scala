@@ -64,4 +64,22 @@ class ConsTest extends FlatSpec with GivenWhenThen with Matchers {
   it should "write 1 - 2 for a list of two items" in {
     assert(Cons(1, Cons(2, Nil)).toString() == "1 - 2")
   }
+
+  it should "be empty when reverse empty" in {
+    assert((Nil reverse) == Nil)
+  }
+
+  it should "be same when single item" in {
+    val list = Cons(1, Nil)
+    val result = list reverse
+
+    assert(result.toString == "1")
+  }
+
+  it should "be reversed for more items" in {
+    val list = Cons(1, Cons(2, Nil))
+    val result = list reverse
+
+    assert(result.toString == "2 - 1")
+  }
 }
