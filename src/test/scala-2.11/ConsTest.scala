@@ -11,10 +11,17 @@ class ConsTest extends FlatSpec with GivenWhenThen with Matchers {
     assert(!(result contains 4))
   }
 
-  it should "not contain same value twice after add" in {
-    val list = Cons(5, Nil)
+  it should "add at the end" in {
+    val list = Cons(3, Nil)
     val result = list add 5
-    assert(list == result)
+
+    assert(result.toString() == "3 - 5")
+  }
+
+  it should "contain 1 after add on Nil" in {
+    val list = Nil add 1
+
+    assert(list.toString == "1")
   }
 
   it should "contain doubled values after map" in {
@@ -51,6 +58,15 @@ class ConsTest extends FlatSpec with GivenWhenThen with Matchers {
     val result = list1 union list2
 
     assert(result.toString == "3 - 3 - 5")
+  }
+
+  it should "contain duplicates from both lists" in {
+    val list1 = Cons(3, Cons(3, Nil))
+    val list2 = Cons(5, Cons(5, Nil))
+
+    val result = list1 union list2
+
+    assert(result.toString == "3 - 3 - 5 - 5")
   }
 
   it should "write empty for an empty list" in {

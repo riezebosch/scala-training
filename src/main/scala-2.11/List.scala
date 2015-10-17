@@ -1,9 +1,9 @@
 import scala.annotation.tailrec
 
 abstract class List[+T] {
-  def add[SuperT >: T](n: SuperT): List[SuperT] = {
-    if (!contains(n)) Cons(n, this)
-    else this
+  def add[SuperT >: T](n: SuperT): List[SuperT] = this match {
+    case Nil => Cons(n, Nil)
+    case Cons(x, xs) => Cons(x, xs add n)
   }
 
   def union[SuperT >: T](list: List[SuperT]): List[SuperT] = this match {
