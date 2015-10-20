@@ -27,4 +27,12 @@ abstract class List[+T] {
     case Cons(x, Nil) => x.toString
     case Cons(x, xs) => s"${x.toString} - ${xs.toString}"
   }
+
+  def ::[SuperT >: T](n: SuperT): List[SuperT] = Cons(n, this)
+
+
+}
+
+object List {
+  implicit def TToCons[T](value: T): List[T] = Cons(value, Nil)
 }

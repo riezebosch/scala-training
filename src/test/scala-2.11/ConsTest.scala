@@ -1,4 +1,5 @@
 import org.scalatest.{Matchers, GivenWhenThen, FlatSpec}
+import List._
 
 class ConsTest extends FlatSpec with GivenWhenThen with Matchers {
   it should "contain after add" in {
@@ -79,5 +80,20 @@ class ConsTest extends FlatSpec with GivenWhenThen with Matchers {
 
   it should "write 1 - 2 for a list of two items" in {
     assert(Cons(1, Cons(2, Nil)).toString() == "1 - 2")
+  }
+
+  it should "concatenate items with the :: operator" in {
+    val list = Cons(1, Nil).::(1)
+    assert(list.toString() == "1 - 1")
+  }
+
+  it should "implicit convert items with the :: operator" in {
+    val list: List[Int] = 1 :: 2
+    assert(list.toString() == "1 - 2")
+  }
+
+  it should "concatenate multiple values in right order" in {
+    val list: List[Int] = 1 :: 2 :: 3
+    assert(list.toString == "1 - 2 - 3")
   }
 }
