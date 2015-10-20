@@ -8,7 +8,7 @@ abstract class List[+T] {
 
   def union[SuperT >: T](list: List[SuperT]): List[SuperT] = this match {
     case Nil => list
-    case Cons(n, xs) =>  if (list contains n) list union xs else Cons(n, xs union list)
+    case Cons(n, xs) => if (list contains n) list union xs else Cons(n, xs union list)
   }
 
   def map[U](f: T => U): List[U] = this match {
@@ -28,9 +28,15 @@ abstract class List[+T] {
     case Cons(x, xs) => s"${x.toString} - ${xs.toString}"
   }
 
+
   def ::[SuperT >: T](n: SuperT): List[SuperT] = Cons(n, this)
 
+  def reverse(): List[Any] = this match {
+    case Nil => Nil
+    case Cons(x, Nil) => this
+    case Cons(x, xs) => xs reverse() add x
 
+  }
 }
 
 object List {
